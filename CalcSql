@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS daily_weather_info (
     ID DATE NOT NULL PRIMARY KEY,
     rainfall_mm TINYINT UNSIGNED,
-    min_temp_cel TINYINT,
+    min_temp_cel TINYINT UNSIGNED,
     time_min_temp TIME,
     max_temp_cel TINYINT UNSIGNED,
     time_max_temp TIME
