@@ -84,7 +84,7 @@ WHERE max_temp_celcius > 30 AND rainfall_mm > 0;
 ```sql
 SELECT * 
 FROM daily_weather_information 
-WHERE ID = CURDATE() - INTERVAL 7 DAY;
+WHERE ID = CURDATE() - INTERVAL 1 WEEK;
   ```
 
 ### **Time Between Min and Max Temperature**
