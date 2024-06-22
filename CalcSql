@@ -25,7 +25,7 @@ SELECT count(ID) AS amount_days_rainfall_over_10mm FROM daily_weather_informatio
 
 SELECT count(ID) AS amount_days_had_rainfall_and_maximum_over_30 FROM daily_weather_information WHERE max_temp_celcius > 30 AND rainfall_mm > 0;
 
- SELECT * FROM daily_weather_information WHERE ID = SUBDATE(2023-02-15, INTERVAL 1 WEEK);
+SELECT * FROM daily_weather_information WHERE ID = SUBDATE(2023-02-15, INTERVAL 1 WEEK);
 
 SELECT TIMEDIFF(time_max_temp_recorded, time_min_temp_recorded) AS range_minimum_and_maximum_temperature_recorded FROM daily_weather_information WHERE ID = 2023-02-15;
 
