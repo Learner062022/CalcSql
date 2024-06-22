@@ -1,0 +1,40 @@
+CREATE TABLE IF NOT EXISTS daily_weather_information(
+ID DATE NOT NULL PRIMARY KEY,
+rainfall_mm TINYINT UNSIGNED,
+min_temp_celcius TINYINT,
+time_min_temp_recorded TIME,
+max_temp_celcius TINYINT UNSIGNED,
+time_max_temp_recorded TIME
+);
+
+SELECT rainfall_mm * 25.4 AS rainfall_in_inches FROM daily_weather_information;
+
+SELECT rainfall_mm * 25.4 AS rainfall_in_inches FROM daily_weather_information WHERE min_temp_celcius > 32;
+
+SELECT ID AS day, rainfall_mm * 25.4 AS rainfall_in_inches FROM daily_weather_information WHERE min_temp_celcius > 32 ORDER BY rainfall_mm * 25.4 DESC;
+
+SELECT ID AS day, ((max_temp_celcius * 1.8) + 32) AS maximum_temperature_in_fahrenheit FROM daily_weather_information;
+
+SELECT ID AS day, ((max_temp_celcius * 1.8) + 32) AS maximum_temperature_fahrenheit, ((min_temp_celcius * 1.8) + 32) AS minimum_temperature_fahrenheit FROM daily_weather_information;
+
+SELECT ID AS day, ((max_temp_celcius * 1.8) + 32) - ((min_temp_celcius * 1.8) + 32) AS temperature_range_in_fahrenheit FROM daily_weather_information;
+
+SELECT AVG(rainfall_mm) AS average_rainfall FROM daily_weather_information;
+
+SELECT count(ID) AS amount_days_rainfall_over_10mm FROM daily_weather_information WHERE rainfall_mm > 10;
+
+SELECT count(ID) AS amount_days_had_rainfall_and_maximum_over_30 FROM daily_weather_information WHERE max_temp_celcius > 30 AND rainfall_mm > 0;
+
+ SELECT * FROM daily_weather_information WHERE ID = SUBDATE(2023-02-15, INTERVAL 1 WEEK);
+
+SELECT TIMEDIFF(time_max_temp_recorded, time_min_temp_recorded) AS range_minimum_and_maximum_temperature_recorded FROM daily_weather_information WHERE ID = 2023-02-15;
+
+SELECT TIMEDIFF(time_max_temp_recorded, time_min_temp_recorded) AS range_minimum_and_maximum_temperature_recorded FROM daily_weather_information WHERE ID = SUBDATE(2023-02-15, INTERVAL 1 DAY);
+
+SELECT ID AS day, TIMEDIFF(time_max_temp_recorded, time_min_temp_recorded) AS range_minimum_and_maximum_temperature_recorded FROM daily_weather_information;
+
+SELECT AVG(time_max_temp_recorded) AS average_time_maximum_temperature_recorded FROM daily_weather_information;
+
+SELECT TIMEDIFF(time_max_temp_recorded, (SELECT AVG(time_max_temp_recorded) FROM daily_weather_information)) AS range_time_maximum_temperature_recorded_and_average_time_maximum_temperature_recorded FROM daily_weather_information;
+
+SELECT ID AS day, rainfall_mm / (SELECT SUM(rainfall_mm) FROM daily_weather_information) * 100 AS percentage_total_rainfall FROM daily_weather_information;
