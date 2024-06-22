@@ -10,7 +10,7 @@ The `daily_weather_info` table schema:
 CREATE TABLE IF NOT EXISTS daily_weather_info (
     ID DATE NOT NULL PRIMARY KEY,
     rainfall_mm TINYINT UNSIGNED,
-    min_temp_cel TINYINT,
+    min_temp_cel TINYINT UNSIGNED,
     time_min_temp TIME,
     max_temp_cel TINYINT UNSIGNED,
     time_max_temp TIME
@@ -22,8 +22,8 @@ Insert fake data for the last thirsty days:
 ```sql
 INSERT INTO daily_weather_info (ID, rainfall_mm, min_temp_cel, time_min_temp, max_temp_cel, time_max_temp)
 VALUES 
-(CURDATE() - INTERVAL 1 DAY, 12.5, 15.2, '05:30:00', 28.3, '14:00:00'),
-(CURDATE() - INTERVAL 2 DAY, 5.0, 17.0, '06:00:00', 32.1, '15:30:00'),
+(CURDATE() - INTERVAL 1 DAY, 12, 15, '05:30:00', 28, '14:00:00'),
+(CURDATE() - INTERVAL 2 DAY, 5, 17, '06:00:00', 32, '15:30:00'),
 -- Add more data for the remaining days
   ```
 
