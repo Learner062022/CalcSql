@@ -75,7 +75,7 @@ The necessary SQL queries for analyzing the weather data providde in `CalcSql` w
 - Computing the percentage of total rainfall 
 
 ## Contributing
-Submitting a pull request or open an issue. 
+Submit a pull request or open an issue. 
 
 ### License
 [GNU General Public License](https://www.gnu.org/licenses/gpl-3.0.txt)
