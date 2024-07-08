@@ -31,11 +31,11 @@ The `daily_weather_info` table schema:
 ```sql
 CREATE TABLE IF NOT EXISTS daily_weather_info (
     ID DATE NOT NULL PRIMARY KEY,
-    rainfall_mm TINYINT UNSIGNED,
-    min_temp_cel TINYINT UNSIGNED,
-    time_min_temp TIME,
-    max_temp_cel TINYINT UNSIGNED,
-    time_max_temp TIME
+    rainfall_mm TINYINT UNSIGNED NOT NULL,
+    min_temp_cel TINYINT UNSIGNED NOT NULL,
+    time_min_temp TIME NOT NULL,
+    max_temp_cel TINYINT UNSIGNED NOT NULL,
+    time_max_temp TIME NOT NULL
 );
   ```
 
