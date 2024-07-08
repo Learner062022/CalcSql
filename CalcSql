@@ -40,17 +40,17 @@ VALUES
 (CURDATE() - INTERVAL 29 DAY, 6, 16, '05:25:00', 28, '14:20:00'),
 (CURDATE() - INTERVAL 30 DAY, 0, 15, '05:05:00', 27, '14:05:00');
 
-SELECT rainfall_mm * 25.4 AS rainfall_inches 
+SELECT rainfall_mm * 0.03937008 AS rainfall_inches 
 FROM daily_weather_info;
 
-SELECT rainfall_mm * 25.4 AS rainfall_inches 
+SELECT rainfall_mm * 0.03937008 AS rainfall_inches 
 FROM daily_weather_info 
-WHERE min_temp_cel > 32;
+WHERE max_temp_cel > 32;
 
-SELECT ID AS day, rainfall_mm * 25.4 AS rainfall_inches 
+SELECT ID AS day, rainfall_mm * 0.03937008 AS rainfall_inches 
 FROM daily_weather_info 
-WHERE min_temp_cel > 32 
-ORDER BY rainfall_mm * 25.4 DESC;
+WHERE max_temp_cel > 32 
+ORDER BY rainfall_mm DESC;
 
 SELECT ID AS day, ((max_temp_cel * 1.8) + 32) AS max_temp_f 
 FROM daily_weather_info;
@@ -79,7 +79,7 @@ WHERE ID = CURDATE() - INTERVAL 1 WEEK;
 
 SELECT TIMEDIFF(time_max_temp, time_min_temp) AS temp_recorded_diff 
 FROM daily_weather_info 
-WHERE ID = CURDATE() - INTERVAL 1 DAY;
+WHERE ID = CURDATE();
 
 SELECT TIMEDIFF(time_max_temp, time_min_temp) AS temp_diff 
 FROM daily_weather_info 
@@ -91,10 +91,12 @@ FROM daily_weather_info;
 SELECT AVG(time_max_temp) AS avg_time_max_temp 
 FROM daily_weather_info;
 
-SELECT TIMEDIFF(time_max_temp, 
-               (SELECT AVG(time_max_temp) 
-                FROM daily_weather_info)) AS diff_avg_time_max_temp 
-FROM daily_weather_info;
+SELECT 
+    ID,
+    time_max_temp, 
+    ABS(TIME_TO_SEC(time_max_temp) - (SELECT AVG(TIME_TO_SEC(time_max_temp)) FROM daily_weather_info)) AS diff_sec
+FROM 
+    daily_weather_info;
 
 SELECT ID AS day, rainfall_mm / (SELECT SUM(rainfall_mm) 
                                  FROM daily_weather_info) * 100 AS rainfall_pct 
